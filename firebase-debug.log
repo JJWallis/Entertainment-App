@@ -1,0 +1,35 @@
+[debug] [2022-03-03T21:52:34.668Z] ----------------------------------------------------------------------
+[debug] [2022-03-03T21:52:34.668Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2022-03-03T21:52:34.669Z] CLI Version:   10.2.2
+[debug] [2022-03-03T21:52:34.669Z] Platform:      darwin
+[debug] [2022-03-03T21:52:34.669Z] Node Version:  v16.13.1
+[debug] [2022-03-03T21:52:34.669Z] Time:          Thu Mar 03 2022 21:52:34 GMT+0000 (Greenwich Mean Time)
+[debug] [2022-03-03T21:52:34.669Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-03T21:52:34.717Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-03T21:52:34.717Z] > authorizing via signed-in user (josh.jamesonwallis@gmail.com)
+[debug] [2022-03-03T21:52:34.717Z] [iam] checking project user-posting for permissions ["firebase.projects.get"]
+[debug] [2022-03-03T21:52:34.718Z] > refreshing access token with scopes: []
+[debug] [2022-03-03T21:52:34.718Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-03T21:52:34.953Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Thu, 03 Mar 2022 21:52:34 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-03T21:52:35.000Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/user-posting:testIamPermissions [none]
+[debug] [2022-03-03T21:52:35.000Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/user-posting:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-03-03T21:52:35.720Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/user-posting:testIamPermissions 200
+[debug] [2022-03-03T21:52:35.720Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/user-posting:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-03-03T21:52:35.721Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/user-posting [none]
+[debug] [2022-03-03T21:52:35.932Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/user-posting 200
+[debug] [2022-03-03T21:52:35.932Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/user-posting {"projectId":"user-posting","projectNumber":"145234245102","displayName":"user-posting","name":"projects/user-posting","resources":{"hostingSite":"user-posting"},"state":"ACTIVE"}
+[info] 
+[info] === Serving from '/Users/jjw/Documents/Web/Projects/Git/next'...
+[info] 
+[debug] [2022-03-03T21:52:35.933Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/user-posting/sites 
+[debug] [2022-03-03T21:52:36.742Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/user-posting/sites 200
+[debug] [2022-03-03T21:52:36.742Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/user-posting/sites {"sites":[{"name":"projects/145234245102/sites/user-posting","defaultUrl":"https://user-posting.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-03-03T21:52:36.743Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/user-posting/webApps/-/config [none]
+[debug] [2022-03-03T21:52:37.558Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/user-posting/webApps/-/config 200
+[debug] [2022-03-03T21:52:37.559Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/user-posting/webApps/-/config {"projectId":"user-posting","appId":"1:145234245102:web:c598d9bbc1fe7bc382caff","storageBucket":"user-posting.appspot.com","apiKey":"AIzaSyDx_kn46INkGKiWgWdYtm5ZidPsKEuCAzM","authDomain":"user-posting.firebaseapp.com","messagingSenderId":"145234245102","measurementId":"G-J3EVYNZMJ8"}
+[info] i  hosting: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [03/Mar/2022:21:52:39 +0000] "GET / HTTP/1.1" 200 4596 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [03/Mar/2022:21:52:39 +0000] \"GET / HTTP/1.1\" 200 4596 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0\""}}
+[info] i  hosting: 127.0.0.1 - - [03/Mar/2022:21:52:39 +0000] "GET /__/firebase/init.js?useEmulator=true HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [03/Mar/2022:21:52:39 +0000] \"GET /__/firebase/init.js?useEmulator=true HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0\""}}
