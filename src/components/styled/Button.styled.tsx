@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const LoginButton = styled.button`
    display: block;
+   border: none;
    border-radius: 5px;
    padding-block: 10px;
    text-align: center;

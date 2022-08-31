@@ -4,7 +4,8 @@ const GlobalStyles = createGlobalStyle`
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
-  font: ${({ theme }) => theme.fontSizes.bodyLarge}/1.6 'Outfit', sans-serif;
+  font: ${({ theme }) => theme.fontWeights.light} ${({ theme }) =>
+   theme.fontSizes.bodyLarge}/1.6 'Outfit', sans-serif;
   overflow-x: hidden;
   background-color: ${({ theme }) => theme.colors.deepBlue};
 }

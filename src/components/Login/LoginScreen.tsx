@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import Logo from '../../assets/logo.svg'
-import { LoginButton } from '../styled/Button.styled'
+import { LoginButton } from '@styled/Button.styled'
 import LoginForm from '../styled/Form.styled'
 import { LoginContainer, LoginLogoContainer } from '../styled/Wrappers.styled'
 
