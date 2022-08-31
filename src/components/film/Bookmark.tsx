@@ -5,6 +5,8 @@ interface Props {
 }
 
 const Bookmark: React.FC<Props> = ({ isBookMarked }) => {
+   const t = ''
+
    return (
       <button
          aria-label={''}
