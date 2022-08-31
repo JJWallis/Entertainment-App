@@ -1,11 +1,9 @@
-export const lightTheme = {
-   mobile: '',
-   tablet: '',
-   desktop: '',
+declare module 'styled-components' {
+   export interface DefaultTheme {
+      breakPoints: { mobile: string; tablet: string; desktop: string }
+   }
 }
 
-export const darkTheme = {
-   mobile: '',
-   tablet: '',
-   desktop: '',
+export const Theme = {
+   breakpoints: { mobile: '', tablet: '', desktop: '' },
 }
