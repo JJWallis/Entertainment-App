@@ -1,14 +1,17 @@
 import type { NextPage } from 'next'
+import { ThemeProvider } from 'styled-components'
 import Navbar from '../components/navbar'
-
-// TODO
-// rename Film comp - not just films
+import GlobalStyles from '../components/styled/GlobalStyles'
+import { Theme } from '../components/styled/Theme'
 
 const Home: NextPage = () => {
    return (
-      <main>
-         <Navbar />
-      </main>
+      <ThemeProvider theme={Theme}>
+         <main>
+            <GlobalStyles />
+            <Navbar />
+         </main>
+      </ThemeProvider>
    )
 }
 

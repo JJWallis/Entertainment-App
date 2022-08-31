@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 body {
-  font: 0.9rem Nunito, sans-serif;
+  font: ${({ theme }) => theme.fontSizes.bodyLarge}/1.6 'Outfit', sans-serif;
   overflow-x: hidden;
 }
 

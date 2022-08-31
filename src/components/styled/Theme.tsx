@@ -1,6 +1,10 @@
 declare module 'styled-components' {
    export interface DefaultTheme {
-      breakPoints: { mobile: string; tablet: string; desktop: string }
+      breakPoints: {
+         mobile: string
+         tablet: string
+         desktop: string
+      }
       colors: {
          brightRed: string
          deepBlue: string
@@ -15,11 +19,16 @@ declare module 'styled-components' {
          headingSmallMedium: string
          headingLarge: string
       }
+      fontWeights: {
+         light: number
+         medium: number
+         bold: number
+      }
    }
 }
 
 export const Theme = {
-   breakpoints: { mobile: '', tablet: '', desktop: '' },
+   breakPoints: { mobile: '', tablet: '', desktop: '' },
    colors: {
       brightRed: '#FC4747',
       deepBlue: '#10141E',
@@ -33,5 +42,10 @@ export const Theme = {
       headingExtraSmall: '18px',
       headingSmallMedium: '24px',
       headingLarge: '32px',
+   },
+   fontWeights: {
+      light: 300,
+      medium: 400,
+      bold: 500,
    },
 }
