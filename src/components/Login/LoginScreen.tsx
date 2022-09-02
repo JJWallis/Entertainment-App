@@ -16,23 +16,33 @@ import {
 
 type FormType = 'signUp' | 'login'
 
+interface InitialState {
+   email: string
+   password: string
+   confirmedPassword?: string // optional required for delete operator
+}
+
 const INITIAL_STATE = {
    email: '',
    password: '',
+   confirmedPassword: '',
 }
 
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
-   const [userDetails, setUserDetails] = useState(INITIAL_STATE)
-   const [errorMessages, setErrorMessage] = useState({
-      ...INITIAL_STATE,
-      confirmedPassword: '',
-   })
-   const [confirmedPassword, setConfirmedPassword] = useState('')
+   const [userDetails, setUserDetails] = useState<InitialState>(INITIAL_STATE)
+   const [errorMessages, setErrorMessage] =
+      useState<InitialState>(INITIAL_STATE)
    const isSignUpForm = formType === 'signUp'
+
+   console.log(userDetails)
 
    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
+      const userDetailsCopy = { ...userDetails }
+      if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
+
+      console.log(Object.entries(userDetails))
    }
 
    return (
@@ -85,9 +95,12 @@ const LoginScreen: React.FC = () => {
                   <LoginInputContainer>
                      <LoginInput
                         type="password"
-                        value={confirmedPassword}
+                        value={userDetails.confirmedPassword}
                         onChange={(evt) =>
-                           setConfirmedPassword(evt.target.value)
+                           setUserDetails({
+                              ...userDetails,
+                              ['confirmedPassword']: evt.target.value,
+                           })
                         }
                         placeholder="Repeat password"
                         error={!!errorMessages.confirmedPassword}
