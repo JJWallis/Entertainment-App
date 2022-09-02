@@ -16,11 +16,17 @@ import {
 
 type FormType = 'signUp' | 'login'
 
+const INITIAL_STATE = {
+   email: '',
+   password: '',
+}
+
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
-   const [userDetails, setUserDetails] = useState({
-      email: '',
-      password: '',
+   const [userDetails, setUserDetails] = useState(INITIAL_STATE)
+   const [errorMessages, setErrorMessage] = useState({
+      ...INITIAL_STATE,
+      confirmedPassword: '',
    })
    const [confirmedPassword, setConfirmedPassword] = useState('')
    const isSignUpForm = formType === 'signUp'
@@ -48,8 +54,13 @@ const LoginScreen: React.FC = () => {
                         })
                      }
                      placeholder="Email address"
-                     error={false}
+                     error={!!errorMessages.email}
                   />
+                  {errorMessages.email && (
+                     <LoginErrorMessage>
+                        {errorMessages.email}
+                     </LoginErrorMessage>
+                  )}
                </LoginInputContainer>
                <LoginInputContainer>
                   <LoginInput
@@ -62,8 +73,13 @@ const LoginScreen: React.FC = () => {
                         })
                      }
                      placeholder="Password"
-                     error={false}
+                     error={!!errorMessages.password}
                   />
+                  {errorMessages.password && (
+                     <LoginErrorMessage>
+                        {errorMessages.password}
+                     </LoginErrorMessage>
+                  )}
                </LoginInputContainer>
                {isSignUpForm && (
                   <LoginInputContainer>
@@ -74,8 +90,13 @@ const LoginScreen: React.FC = () => {
                            setConfirmedPassword(evt.target.value)
                         }
                         placeholder="Repeat password"
-                        error={false}
+                        error={!!errorMessages.confirmedPassword}
                      />
+                     {errorMessages.confirmedPassword && (
+                        <LoginErrorMessage>
+                           {errorMessages.confirmedPassword}
+                        </LoginErrorMessage>
+                     )}
                   </LoginInputContainer>
                )}
             </LoginFieldSet>
