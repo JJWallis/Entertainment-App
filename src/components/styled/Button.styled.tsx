@@ -4,7 +4,7 @@ export const LoginButton = styled.button`
    display: block;
    width: 100%;
    border: none;
-   border-radius: 5px;
+   border-radius: 7px;
    padding-block: 0.8rem;
    text-align: center;
    background-color: ${({ theme }) => theme.colors.brightRed};

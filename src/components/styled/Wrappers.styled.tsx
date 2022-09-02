@@ -13,6 +13,5 @@ export const LoginLogoContainer = styled.div`
 `
 
 export const LoginInputContainer = styled.div`
-   outline: 1px solid white;
    position: relative;
 `
