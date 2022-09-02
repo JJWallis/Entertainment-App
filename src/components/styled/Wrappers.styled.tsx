@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
-   display: grid;
-   place-items: center;
-   width: min(90%, 400px);
-   margin-inline: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    min-height: 100vh;
 `
 
