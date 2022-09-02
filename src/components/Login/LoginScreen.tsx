@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '../../assets/logo.svg'
 import { LoginButton } from '../styled/Button.styled'
 import { LoginErrorMessage } from '../styled/ErrorMessage.styled'
@@ -14,14 +14,21 @@ import {
    LoginLogoContainer,
 } from '../styled/Wrappers.styled'
 
+type FormType = 'signUp' | 'login'
+
 const LoginScreen: React.FC = () => {
+   const [formType, setFormType] = useState<FormType>('signUp')
+   const isSignUpForm = formType === 'signUp'
+
+   console.log('Running')
+
    return (
       <LoginContainer>
          <LoginLogoContainer>
             <Image src={Logo} alt="" width="35px" height="35px" />
          </LoginLogoContainer>
          <LoginForm>
-            <LoginTitle>Sign Up</LoginTitle>
+            <LoginTitle>{isSignUpForm ? 'Sign Up' : 'Login'}</LoginTitle>
             <LoginFieldSet>
                <LoginInputContainer>
                   <LoginInput
@@ -37,17 +44,29 @@ const LoginScreen: React.FC = () => {
                      error={false}
                   />
                </LoginInputContainer>
-               <LoginInputContainer>
-                  <LoginInput
-                     type="password"
-                     placeholder="Repeat password"
-                     error={false}
-                  />
-               </LoginInputContainer>
+               {isSignUpForm && (
+                  <LoginInputContainer>
+                     <LoginInput
+                        type="password"
+                        placeholder="Repeat password"
+                        error={false}
+                     />
+                  </LoginInputContainer>
+               )}
             </LoginFieldSet>
-            <LoginButton>Create an account</LoginButton>
+            <LoginButton>
+               {isSignUpForm ? 'Create an account' : 'Login to your account'}
+            </LoginButton>
             <LoginSubTitle>
-               Already have an account? <button>Login</button>
+               {isSignUpForm
+                  ? 'Already have an account?'
+                  : "Don't have an account?"}
+               <button
+                  type="button"
+                  onClick={() => setFormType(isSignUpForm ? 'login' : 'signUp')}
+               >
+                  {isSignUpForm ? 'Login' : 'Sign Up'}
+               </button>
             </LoginSubTitle>
          </LoginForm>
       </LoginContainer>
