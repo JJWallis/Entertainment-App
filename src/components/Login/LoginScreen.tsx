@@ -31,18 +31,36 @@ const INITIAL_STATE = {
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
    const [userDetails, setUserDetails] = useState<InitialState>(INITIAL_STATE)
-   const [errorMessages, setErrorMessage] =
+   const [errorMessages, setErrorMessages] =
       useState<InitialState>(INITIAL_STATE)
    const isSignUpForm = formType === 'signUp'
 
-   console.log(userDetails)
+   const validateCurrentField = (key: string, value: string) => {
+      if (key === 'email') return 'Email error'
+      if (key === 'password') return 'Password error'
+      if (key === 'confirmedPassword') return 'Confirmed password error'
+   }
 
    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       const userDetailsCopy = { ...userDetails }
       if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
 
-      console.log(Object.entries(userDetails))
+      console.log(Object.entries(userDetailsCopy))
+
+      const newErrorMessages: Partial<InitialState> = Object.entries(
+         userDetailsCopy
+      ).reduce((acc, [key, value]) => {
+         const currentErrorMessage = validateCurrentField(key, value)
+         return { ...acc, [key]: currentErrorMessage }
+      }, {})
+
+      if (!newErrorMessages.confirmedPassword)
+         newErrorMessages.confirmedPassword = ''
+
+      console.log(newErrorMessages)
+
+      setErrorMessages(newErrorMessages as InitialState)
    }
 
    return (
