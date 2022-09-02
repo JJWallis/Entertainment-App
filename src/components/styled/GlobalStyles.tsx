@@ -60,6 +60,12 @@ select {
   font: inherit;
 }
 
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
    scroll-behavior: auto;
