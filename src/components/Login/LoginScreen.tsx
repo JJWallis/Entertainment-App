@@ -29,7 +29,7 @@ const LoginScreen: React.FC = () => {
             </LoginFieldSet>
             <LoginButton>Create an account</LoginButton>
             <LoginSubTitle>
-               Already have an account? <a>Login</a>
+               Already have an account? <button>Login</button>
             </LoginSubTitle>
          </LoginForm>
       </LoginContainer>

@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 body {
+  min-width: 320px;
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   font: ${({ theme }) => theme.fontWeights.light} ${({ theme }) =>
