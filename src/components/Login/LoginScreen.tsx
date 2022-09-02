@@ -7,7 +7,11 @@ import LoginForm from '../styled/Form.styled'
 import { LoginInput } from '../styled/Input.styled'
 import { LoginSubTitle } from '../styled/SubTitle.styled'
 import { LoginTitle } from '../styled/Title.styled'
-import { LoginContainer, LoginLogoContainer } from '../styled/Wrappers.styled'
+import {
+   LoginContainer,
+   LoginInputContainer,
+   LoginLogoContainer,
+} from '../styled/Wrappers.styled'
 
 const LoginScreen: React.FC = () => {
    return (
@@ -18,27 +22,27 @@ const LoginScreen: React.FC = () => {
          <LoginForm>
             <LoginTitle>Sign Up</LoginTitle>
             <LoginFieldSet>
-               <div>
+               <LoginInputContainer>
                   <LoginInput
                      type="email"
                      placeholder="Email address"
                      error={false}
                   />
-               </div>
-               <div>
+               </LoginInputContainer>
+               <LoginInputContainer>
                   <LoginInput
                      type="password"
                      placeholder="Password"
                      error={false}
                   />
-               </div>
-               <div>
+               </LoginInputContainer>
+               <LoginInputContainer>
                   <LoginInput
                      type="password"
                      placeholder="Repeat password"
                      error={false}
                   />
-               </div>
+               </LoginInputContainer>
             </LoginFieldSet>
             <LoginButton>Create an account</LoginButton>
             <LoginSubTitle>

@@ -6,7 +6,7 @@ interface LoginInputProps {
 
 export const LoginInput = styled.input<LoginInputProps>`
    width: 100%;
-   padding: 1.5rem 0 0.9rem 1rem;
+   padding: 1rem;
    border: none;
    border-bottom: 1.5px solid
       ${({ error, theme }) =>
