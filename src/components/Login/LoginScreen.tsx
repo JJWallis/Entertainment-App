@@ -18,21 +18,35 @@ type FormType = 'signUp' | 'login'
 
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
+   const [userDetails, setUserDetails] = useState({
+      email: '',
+      password: '',
+   })
+   const [confirmedPassword, setConfirmedPassword] = useState('')
    const isSignUpForm = formType === 'signUp'
 
-   console.log('Running')
+   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+   }
 
    return (
       <LoginContainer>
          <LoginLogoContainer>
             <Image src={Logo} alt="" width="35px" height="35px" />
          </LoginLogoContainer>
-         <LoginForm>
+         <LoginForm onSubmit={handleFormSubmit}>
             <LoginTitle>{isSignUpForm ? 'Sign Up' : 'Login'}</LoginTitle>
             <LoginFieldSet>
                <LoginInputContainer>
                   <LoginInput
                      type="email"
+                     value={userDetails.email}
+                     onChange={(evt) =>
+                        setUserDetails({
+                           ...userDetails,
+                           ['email']: evt.target.value,
+                        })
+                     }
                      placeholder="Email address"
                      error={false}
                   />
@@ -40,6 +54,13 @@ const LoginScreen: React.FC = () => {
                <LoginInputContainer>
                   <LoginInput
                      type="password"
+                     value={userDetails.password}
+                     onChange={(evt) =>
+                        setUserDetails({
+                           ...userDetails,
+                           ['password']: evt.target.value,
+                        })
+                     }
                      placeholder="Password"
                      error={false}
                   />
@@ -48,6 +69,10 @@ const LoginScreen: React.FC = () => {
                   <LoginInputContainer>
                      <LoginInput
                         type="password"
+                        value={confirmedPassword}
+                        onChange={(evt) =>
+                           setConfirmedPassword(evt.target.value)
+                        }
                         placeholder="Repeat password"
                         error={false}
                      />
