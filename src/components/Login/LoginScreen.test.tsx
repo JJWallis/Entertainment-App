@@ -1,5 +1,5 @@
 import react from 'react'
-import { generateLoginErrorMessages } from './LoginScreen'
+import { generateLoginErrorMessages, LoginFormValidator } from './LoginScreen'
 
 describe('login signUp form', () => {
    it('generate login error messages will return correct error message state', () => {
@@ -8,7 +8,7 @@ describe('login signUp form', () => {
          password: '',
          confirmedPassword: '',
       }
-      const mockValidateFunc = (key: string, value: string) => {
+      const mockValidateFunc: LoginFormValidator = (key, value) => {
          if (key === 'email') return 'test email error'
          if (key === 'password') return 'test password error'
          if (key === 'confirmedPassword') return 'test confirmedPassword error'

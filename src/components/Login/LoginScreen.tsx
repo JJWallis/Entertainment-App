@@ -14,7 +14,11 @@ import {
    LoginLogoContainer,
 } from '../styled/Wrappers.styled'
 
+// TODO -> useDeferredValue() to debounce validation as user types
+
 type FormType = 'signUp' | 'login'
+type InitialStateValidation = Partial<InitialState>
+export type LoginFormValidator = (key: string, value: string) => string
 
 interface InitialState {
    email: string
@@ -33,8 +37,8 @@ const INITIAL_STATE = {
 }
 
 export const generateLoginErrorMessages = (
-   userDetailsCopy: Partial<InitialState>,
-   validateCurrentField: (key: string, value: string) => string
+   userDetailsCopy: InitialStateValidation,
+   validateCurrentField: LoginFormValidator
 ) =>
    Object.entries(userDetailsCopy).reduce((acc, [key, value]) => {
       const currentErrorMessage = validateCurrentField(key, value)
@@ -48,7 +52,7 @@ const LoginScreen: React.FC = () => {
       useState<InitialState>(INITIAL_STATE)
    const isSignUpForm = formType === 'signUp'
 
-   const validateCurrentField = (key: string, value: string) => {
+   const validateCurrentField: LoginFormValidator = (key, value) => {
       switch (key) {
          case 'email': {
             if (value.length === 0) return "Can't be empty"
@@ -77,7 +81,7 @@ const LoginScreen: React.FC = () => {
       const userDetailsCopy = { ...userDetails }
       if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
 
-      const newErrorMessages: Partial<InitialState> =
+      const newErrorMessages: InitialStateValidation =
          generateLoginErrorMessages(userDetailsCopy, validateCurrentField)
 
       const isConfirmedPasswordExisting =
