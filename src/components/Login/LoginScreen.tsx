@@ -32,6 +32,15 @@ const INITIAL_STATE = {
    confirmedPassword: '',
 }
 
+export const generateLoginErrorMessages = (
+   userDetailsCopy: Partial<InitialState>,
+   validateCurrentField: (key: string, value: string) => string
+) =>
+   Object.entries(userDetailsCopy).reduce((acc, [key, value]) => {
+      const currentErrorMessage = validateCurrentField(key, value)
+      return { ...acc, [key]: currentErrorMessage }
+   }, {})
+
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
    const [userDetails, setUserDetails] = useState<InitialState>(INITIAL_STATE)
@@ -68,12 +77,8 @@ const LoginScreen: React.FC = () => {
       const userDetailsCopy = { ...userDetails }
       if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
 
-      const newErrorMessages: Partial<InitialState> = Object.entries(
-         userDetailsCopy
-      ).reduce((acc, [key, value]) => {
-         const currentErrorMessage = validateCurrentField(key, value)
-         return { ...acc, [key]: currentErrorMessage }
-      }, {})
+      const newErrorMessages: Partial<InitialState> =
+         generateLoginErrorMessages(userDetailsCopy, validateCurrentField)
 
       const isConfirmedPasswordExisting =
          'confirmedPassword' in newErrorMessages
