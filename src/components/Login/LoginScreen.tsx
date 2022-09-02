@@ -55,8 +55,10 @@ const LoginScreen: React.FC = () => {
          return { ...acc, [key]: currentErrorMessage }
       }, {})
 
-      if (!newErrorMessages.confirmedPassword)
+      if (!newErrorMessages.confirmedPassword) {
          newErrorMessages.confirmedPassword = ''
+         setUserDetails({ ...userDetails, ['confirmedPassword']: '' })
+      }
 
       console.log(newErrorMessages)
 
