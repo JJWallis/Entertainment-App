@@ -14,7 +14,8 @@ import {
    LoginLogoContainer,
 } from '../styled/Wrappers.styled'
 
-// TODO -> useDeferredValue() to debounce validation as user types
+// TODO -> useDeferredValue() to debounce validation as user types - https://www.youtube.com/watch?v=jCGMedd6IWA&t=174s
+// https://github.com/reactjs/rfcs/blob/main/text/0213-suspense-in-react-18.md -> suspense for loading state
 
 type FormType = 'signUp' | 'login'
 type InitialStateValidation = Partial<InitialState>
@@ -35,15 +36,6 @@ const INITIAL_STATE = {
    password: '',
    confirmedPassword: '',
 }
-
-export const generateLoginErrorMessages = (
-   userDetailsCopy: InitialStateValidation,
-   validateCurrentField: LoginFormValidator
-) =>
-   Object.entries(userDetailsCopy).reduce((acc, [key, value]) => {
-      const currentErrorMessage = validateCurrentField(key, value)
-      return { ...acc, [key]: currentErrorMessage }
-   }, {})
 
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
@@ -81,8 +73,12 @@ const LoginScreen: React.FC = () => {
       const userDetailsCopy = { ...userDetails }
       if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
 
-      const newErrorMessages: InitialStateValidation =
-         generateLoginErrorMessages(userDetailsCopy, validateCurrentField)
+      const newErrorMessages: InitialStateValidation = Object.entries(
+         userDetailsCopy
+      ).reduce((acc, [key, value]) => {
+         const currentErrorMessage = validateCurrentField(key, value)
+         return { ...acc, [key]: currentErrorMessage }
+      }, {})
 
       const isConfirmedPasswordExisting =
          'confirmedPassword' in newErrorMessages
@@ -105,6 +101,7 @@ const LoginScreen: React.FC = () => {
             <LoginFieldSet>
                <LoginInputContainer>
                   <LoginInput
+                     data-testid="login-email-field"
                      type="email"
                      value={userDetails.email}
                      onChange={(evt) =>
@@ -117,7 +114,7 @@ const LoginScreen: React.FC = () => {
                      error={!!errorMessages.email}
                   />
                   {errorMessages.email && (
-                     <LoginErrorMessage>
+                     <LoginErrorMessage data-testid="login-email-error">
                         {errorMessages.email}
                      </LoginErrorMessage>
                   )}

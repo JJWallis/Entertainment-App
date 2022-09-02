@@ -1,29 +1,38 @@
-import react from 'react'
-import { generateLoginErrorMessages, LoginFormValidator } from './LoginScreen'
+import LoginScreen from './LoginScreen'
+import { render, fireEvent } from '@testing-library/react'
+import { Theme } from '../styled/Theme'
+import '@testing-library/jest-dom'
+import { ThemeProvider } from 'styled-components'
+
+const renderEditor = () => {
+   const utils = render(
+      <ThemeProvider theme={Theme}>
+         <LoginScreen />
+      </ThemeProvider>
+   )
+   return utils
+}
 
 describe('login signUp form', () => {
-   it('generate login error messages will return correct error message state', () => {
-      const mockUserDetails = {
-         email: '',
-         password: '',
-         confirmedPassword: '',
-      }
-      const mockValidateFunc: LoginFormValidator = (key, value) => {
-         if (key === 'email') return 'test email error'
-         if (key === 'password') return 'test password error'
-         if (key === 'confirmedPassword') return 'test confirmedPassword error'
-         return ''
-      }
+   it('renders form and form controls correctly on initial load', () => {
+      const { getByRole, getAllByRole, getByTestId, getByText } = renderEditor()
+      const inputs = getAllByRole('textbox')
+      const emailField = getByTestId('login-email-field')
 
-      const newErrorMessages = generateLoginErrorMessages(
-         mockUserDetails,
-         mockValidateFunc
-      )
-
-      expect(newErrorMessages).toEqual({
-         confirmedPassword: 'test confirmedPassword error',
-         email: 'test email error',
-         password: 'test password error',
+      inputs.map((input) => {
+         expect(input.textContent).toBe('')
       })
+
+      fireEvent.change(emailField, {
+         target: {
+            value: 'bad.email@test',
+         },
+      })
+
+      expect(emailField).toHaveValue('bad.email@test')
+      fireEvent.click(getByText(/create an account/i))
+
+      const emailError = getByTestId('login-email-error')
+      expect(emailError).toBeInTheDocument()
    })
 })
