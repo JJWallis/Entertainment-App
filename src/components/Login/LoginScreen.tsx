@@ -22,6 +22,10 @@ interface InitialState {
    confirmedPassword?: string // optional required for delete operator
 }
 
+const REGEXP_PASSWORD = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/
+const REGEXP_EMAIL =
+   /^(?=(.{1,64}@.{1,255}))([!#$%&amp;'*+\-\/=?\^_`{|}~a-zA-Z0-9}]{1,64}(\.[!#$%&amp;'*+\-\/=?\^_`{|}~a-zA-Z0-9]{0,}){0,})@((\[(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\])|([a-zA-Z0-9-]{1,63}(\.[a-zA-Z0-9-]{2,63}){1,}))$/
+
 const INITIAL_STATE = {
    email: '',
    password: '',
@@ -36,17 +40,33 @@ const LoginScreen: React.FC = () => {
    const isSignUpForm = formType === 'signUp'
 
    const validateCurrentField = (key: string, value: string) => {
-      if (key === 'email') return 'Email error'
-      if (key === 'password') return 'Password error'
-      if (key === 'confirmedPassword') return 'Confirmed password error'
+      switch (key) {
+         case 'email': {
+            if (value.length === 0) return "Can't be empty"
+            if (!REGEXP_EMAIL.test(value)) return 'Please enter a valid email'
+            break
+         }
+         case 'password': {
+            if (value.length === 0) return "Can't be empty"
+            if (!REGEXP_PASSWORD.test(value))
+               return 'Please enter a valid password'
+            break
+         }
+         case 'confirmedPassword': {
+            if (value.length === 0) return "Can't be empty"
+            if (value !== userDetails.password) return "Passwords don't match"
+            break
+         }
+         default:
+            return ''
+      }
+      return ''
    }
 
    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       const userDetailsCopy = { ...userDetails }
       if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
-
-      console.log(Object.entries(userDetailsCopy))
 
       const newErrorMessages: Partial<InitialState> = Object.entries(
          userDetailsCopy
@@ -55,12 +75,13 @@ const LoginScreen: React.FC = () => {
          return { ...acc, [key]: currentErrorMessage }
       }, {})
 
-      if (!newErrorMessages.confirmedPassword) {
+      const isConfirmedPasswordExisting =
+         'confirmedPassword' in newErrorMessages
+
+      if (!isConfirmedPasswordExisting) {
          newErrorMessages.confirmedPassword = ''
          setUserDetails({ ...userDetails, ['confirmedPassword']: '' })
       }
-
-      console.log(newErrorMessages)
 
       setErrorMessages(newErrorMessages as InitialState)
    }
