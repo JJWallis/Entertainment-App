@@ -4,6 +4,7 @@ import Logo from '../../assets/logo.svg'
 import { LoginButton } from '../styled/Button.styled'
 import { LoginFieldSet } from '../styled/Fieldset.styled'
 import LoginForm from '../styled/Form.styled'
+import { LoginInput } from '../styled/Input.styled'
 import { LoginSubTitle } from '../styled/SubTitle.styled'
 import { LoginTitle } from '../styled/Title.styled'
 import { LoginContainer, LoginLogoContainer } from '../styled/Wrappers.styled'
@@ -18,13 +19,25 @@ const LoginScreen: React.FC = () => {
             <LoginTitle>Sign Up</LoginTitle>
             <LoginFieldSet>
                <div>
-                  <input type="email" />
+                  <LoginInput
+                     type="email"
+                     placeholder="Email address"
+                     error={false}
+                  />
                </div>
                <div>
-                  <input type="password" />
+                  <LoginInput
+                     type="password"
+                     placeholder="Password"
+                     error={false}
+                  />
                </div>
                <div>
-                  <input type="password" />
+                  <LoginInput
+                     type="password"
+                     placeholder="Repeat password"
+                     error={false}
+                  />
                </div>
             </LoginFieldSet>
             <LoginButton>Create an account</LoginButton>
