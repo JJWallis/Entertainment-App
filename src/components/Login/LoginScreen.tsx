@@ -14,14 +14,13 @@ import {
    LoginLogoContainer,
 } from '../styled/Wrappers.styled'
 
-// TODO -> useDeferredValue() to debounce validation as user types - https://www.youtube.com/watch?v=jCGMedd6IWA&t=174s
+// TODO
 // https://github.com/reactjs/rfcs/blob/main/text/0213-suspense-in-react-18.md -> suspense for loading state
 
 type FormType = 'signUp' | 'login'
-type InitialStateValidation = Partial<InitialState>
-export type LoginFormValidator = (key: string, value: string) => string
+type FormStateValidation = Partial<InitialFormState>
 
-interface InitialState {
+interface InitialFormState {
    email: string
    password: string
    confirmedPassword?: string // optional required for delete operator
@@ -39,12 +38,13 @@ const INITIAL_STATE = {
 
 const LoginScreen: React.FC = () => {
    const [formType, setFormType] = useState<FormType>('signUp')
-   const [userDetails, setUserDetails] = useState<InitialState>(INITIAL_STATE)
+   const [userDetails, setUserDetails] =
+      useState<InitialFormState>(INITIAL_STATE)
    const [errorMessages, setErrorMessages] =
-      useState<InitialState>(INITIAL_STATE)
+      useState<InitialFormState>(INITIAL_STATE)
    const isSignUpForm = formType === 'signUp'
 
-   const validateCurrentField: LoginFormValidator = (key, value) => {
+   const validateCurrentField = (key: string, value: string) => {
       switch (key) {
          case 'email': {
             if (value.length === 0) return "Can't be empty"
@@ -73,7 +73,7 @@ const LoginScreen: React.FC = () => {
       const userDetailsCopy = { ...userDetails }
       if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
 
-      const newErrorMessages: InitialStateValidation = Object.entries(
+      const newErrorMessages: FormStateValidation = Object.entries(
          userDetailsCopy
       ).reduce((acc, [key, value]) => {
          const currentErrorMessage = validateCurrentField(key, value)
@@ -88,7 +88,7 @@ const LoginScreen: React.FC = () => {
          setUserDetails({ ...userDetails, ['confirmedPassword']: '' })
       }
 
-      setErrorMessages(newErrorMessages as InitialState)
+      setErrorMessages(newErrorMessages as InitialFormState)
    }
 
    return (
