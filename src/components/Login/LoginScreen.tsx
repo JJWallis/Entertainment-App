@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from '../../assets/logo.svg'
 import { LoginButton } from '../styled/Button.styled'
 import { LoginErrorMessage } from '../styled/ErrorMessage.styled'
@@ -42,67 +42,63 @@ const LoginScreen: React.FC = () => {
       useState<InitialFormState>(INITIAL_STATE)
    const [errorMessages, setErrorMessages] =
       useState<InitialFormState>(INITIAL_STATE)
-   const isOnMountRef = useRef(true)
    const isSignUpForm = formType === 'signUp'
 
-   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) =>
       e.preventDefault()
-   }
 
    useEffect(() => {
-      console.log('outside running', userDetails)
-      if (!isOnMountRef.current) {
-         console.log('inside running', userDetails)
-         const validateCurrentField = (key: string, value: string) => {
-            switch (key) {
-               case 'email': {
-                  if (value.length === 0) return "Can't be empty"
-                  if (!REGEXP_EMAIL.test(value))
-                     return 'Please enter a valid email'
-                  break
-               }
-               case 'password': {
-                  if (value.length === 0) return "Can't be empty"
-                  if (!REGEXP_PASSWORD.test(value))
-                     return 'Please enter a valid password'
-                  break
-               }
-               case 'confirmedPassword': {
-                  if (value.length === 0) return "Can't be empty"
-                  if (value !== userDetails.password)
-                     return "Passwords don't match"
-                  break
-               }
-               default:
-                  return ''
+      const validateCurrentField = (key: string, value: string) => {
+         switch (key) {
+            case 'email': {
+               if (value.length === 0) return ''
+               if (!REGEXP_EMAIL.test(value))
+                  return 'Please enter a valid email'
+               break
             }
-            return ''
+            case 'password': {
+               if (value.length === 0) return ''
+               if (!REGEXP_PASSWORD.test(value))
+                  return 'Please enter a valid password'
+               break
+            }
+            case 'confirmedPassword': {
+               if (value.length === 0) return ''
+               if (value !== userDetails.password)
+                  return "Passwords don't match"
+               break
+            }
+            default:
+               return ''
          }
-
-         const userDetailsCopy = { ...userDetails }
-         if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
-
-         const newErrorMessages: FormStateValidation = Object.entries(
-            userDetailsCopy
-         ).reduce((acc, [key, value]) => {
-            const currentErrorMessage = validateCurrentField(key, value)
-            return { ...acc, [key]: currentErrorMessage }
-         }, {})
-
-         const isConfirmedPasswordExisting =
-            'confirmedPassword' in newErrorMessages
-
-         if (!isConfirmedPasswordExisting) {
-            newErrorMessages.confirmedPassword = ''
-            setUserDetails((prevUserDetails) => ({
-               ...prevUserDetails,
-               ['confirmedPassword']: '',
-            }))
-         }
-
-         setErrorMessages(newErrorMessages as InitialFormState)
+         return ''
       }
-      isOnMountRef.current = false
+
+      const userDetailsCopy = { ...userDetails }
+      if (!isSignUpForm) delete userDetailsCopy.confirmedPassword
+
+      const newErrorMessages: FormStateValidation = Object.entries(
+         userDetailsCopy
+      ).reduce((acc, [key, value]) => {
+         const currentErrorMessage = validateCurrentField(key, value)
+         return { ...acc, [key]: currentErrorMessage }
+      }, {})
+
+      const hasConfirmedPassword = 'confirmedPassword' in newErrorMessages
+
+      if (!hasConfirmedPassword) {
+         newErrorMessages.confirmedPassword = ''
+         setUserDetails((prevUserDetails) => ({
+            ...prevUserDetails,
+            ['confirmedPassword']: '',
+         }))
+      }
+
+      const isErrorMessagesDifferent =
+         JSON.stringify(errorMessages) !== JSON.stringify(newErrorMessages)
+
+      if (isErrorMessagesDifferent)
+         setErrorMessages(newErrorMessages as InitialFormState)
    }, [userDetails, isSignUpForm, errorMessages])
 
    return (
