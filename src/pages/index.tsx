@@ -6,7 +6,9 @@ import RenderPage from '../components/page/RenderPage';
 const Home: NextPage = () => {
    return (
       <RenderPage>
-         <LoginScreen />
+         <main>
+            <LoginScreen />
+         </main>
       </RenderPage>
    );
 };

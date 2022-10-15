@@ -10,7 +10,7 @@ interface Props {
 const RenderPage: React.FC<Props> = ({ children }) => (
    <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <main>{children}</main>
+      {children}
    </ThemeProvider>
 );
 
