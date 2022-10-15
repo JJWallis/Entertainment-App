@@ -13,27 +13,18 @@ interface Props extends User {
    status: 'success' | 'fail';
 }
 
-interface Photo {
-   url: string;
-}
-
 export const getStaticProps = async () => {
    try {
-      const [userResponse, photosResponse] = await Promise.all([
-         axios.get('https://jsonplaceholder.typicode.com/users'),
-         axios.get('https://jsonplaceholder.typicode.com/photos'),
-      ]);
+      const { data: userData }: { data: User[] } = await axios.get(
+         'https://jsonplaceholder.typicode.com/users'
+      );
 
-      const userData: User[] = userResponse.data;
-      const photoData: Photo[] = photosResponse.data;
-
-      const profileImage = photoData[0].url;
       const { email, name, username } = userData[0];
 
       return {
          props: {
             status: 'success',
-            profileImage,
+            profileImage: 'https://via.placeholder.com/800.png',
             email,
             name,
             username,
@@ -56,7 +47,6 @@ const Dashboard: React.FC<Props> = ({
    profileImage,
    status,
 }) => {
-   console.log({ profileImage });
    return (
       <RenderPage>
          <main>
@@ -77,7 +67,9 @@ const Dashboard: React.FC<Props> = ({
                         <Image
                            src={profileImage}
                            alt="user profile"
-                           layout="fill"
+                           layout="responsive"
+                           width="800"
+                           height="800"
                         />
                      </div>
                   </>
