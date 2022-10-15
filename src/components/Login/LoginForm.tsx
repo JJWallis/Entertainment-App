@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+
 import { LoginTitle } from '../styled/Title.styled';
 import LoginFormStyled from '../styled/Form.styled';
 import { LoginFieldSet } from '../styled/Fieldset.styled';
@@ -47,9 +49,6 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
       ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
       : ['Login', 'Login to your account', "Don't have an account?", 'Sign Up'];
 
-   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) =>
-      e.preventDefault();
-
    useEffect(() => {
       const validateCurrentField = (key: string, value: string) => {
          switch (key) {
@@ -94,7 +93,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
    }, [userDetails, isSignUpForm, errorMessages]);
 
    return (
-      <LoginFormStyled onSubmit={handleFormSubmit}>
+      <LoginFormStyled>
          <LoginTitle>{formTitle}</LoginTitle>
          <LoginFieldSet>
             <LoginInputContainer>
@@ -158,7 +157,9 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                </LoginInputContainer>
             )}
          </LoginFieldSet>
-         <LoginButton>{submitBtnValue}</LoginButton>
+         <Link href={'/dashboard'}>
+            <LoginButton type="button">{submitBtnValue}</LoginButton>
+         </Link>
          <LoginSubTitle>
             {ctaValue}
             <button type="button" onClick={toggleFormType}>

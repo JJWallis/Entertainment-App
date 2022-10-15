@@ -1,18 +1,14 @@
-import type { NextPage } from 'next'
-import { ThemeProvider } from 'styled-components'
-import LoginScreen from '../components/Login'
-import GlobalStyles from '../components/styled/GlobalStyles'
-import { Theme } from '../components/styled/Theme'
+import type { NextPage } from 'next';
+
+import LoginScreen from '../components/Login';
+import RenderPage from '../components/page/RenderPage';
 
 const Home: NextPage = () => {
    return (
-      <ThemeProvider theme={Theme}>
-         <GlobalStyles />
-         <main>
-            <LoginScreen />
-         </main>
-      </ThemeProvider>
-   )
-}
+      <RenderPage>
+         <LoginScreen />
+      </RenderPage>
+   );
+};
 
-export default Home
+export default Home;
