@@ -43,6 +43,10 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
       initState(isSignUpForm)
    );
 
+   const [formTitle, submitBtnValue, ctaValue, toggleFormLink] = isSignUpForm
+      ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
+      : ['Login', 'Login to your account', "Don't have an account?", 'Sign Up'];
+
    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) =>
       e.preventDefault();
 
@@ -85,15 +89,13 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
       const isErrorMessagesDifferent =
          JSON.stringify(errorMessages) !== JSON.stringify(newErrorMessages);
 
-      console.log({ userDetails });
-
       if (isErrorMessagesDifferent)
          setErrorMessages(newErrorMessages as InitialFormState);
    }, [userDetails, isSignUpForm, errorMessages]);
 
    return (
       <LoginFormStyled onSubmit={handleFormSubmit}>
-         <LoginTitle>{isSignUpForm ? 'Sign Up' : 'Login'}</LoginTitle>
+         <LoginTitle>{formTitle}</LoginTitle>
          <LoginFieldSet>
             <LoginInputContainer>
                <LoginInput
@@ -156,15 +158,11 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                </LoginInputContainer>
             )}
          </LoginFieldSet>
-         <LoginButton>
-            {isSignUpForm ? 'Create an account' : 'Login to your account'}
-         </LoginButton>
+         <LoginButton>{submitBtnValue}</LoginButton>
          <LoginSubTitle>
-            {isSignUpForm
-               ? 'Already have an account?'
-               : "Don't have an account?"}
+            {ctaValue}
             <button type="button" onClick={toggleFormType}>
-               {isSignUpForm ? 'Login' : 'Sign Up'}
+               {toggleFormLink}
             </button>
          </LoginSubTitle>
       </LoginFormStyled>
