@@ -2,8 +2,7 @@ import { createContext } from 'react';
 
 type UserStatus = User | null;
 
-interface User {
-   id: number;
+export interface User {
    name: string;
    username: string;
    email: string;
