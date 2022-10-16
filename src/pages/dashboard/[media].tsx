@@ -25,14 +25,18 @@ export async function getStaticPaths() {
 
 const Dashboard: NextPage = () => {
    const { query } = useRouter();
-   const { media: mediaType } = query;
+   const { media } = query;
+   const mediaType = media as string;
 
    const collectMediaBasedOnRoute = () =>
       data.filter(({ category, isBookmarked }) => {
-         if (['movie', 'tv'].includes(mediaType as string)) {
-            return category.toLowerCase().includes(mediaType as string);
+         const currCategory = category.toLowerCase();
+         const mediaTypes = ['movie', 'tv'];
+
+         if (mediaTypes.includes(mediaType)) {
+            return currCategory.includes(mediaType);
          } else if (mediaType === 'recommended') {
-            return ['movie', 'tv'].includes(category.toLowerCase());
+            return mediaTypes.includes(currCategory);
          } else {
             return !!isBookmarked;
          }
@@ -40,14 +44,12 @@ const Dashboard: NextPage = () => {
 
    const relevantMediaData = collectMediaBasedOnRoute();
 
-   console.log({ relevantMediaData });
-
    return (
       <main>
-         <NavigationBar activeMediaType={mediaType as string} />
+         <NavigationBar activeMediaType={mediaType} />
          <input type="text" placeholder="Search for TV Series" />
          <MediaGallery
-            title={mediaType as string}
+            title={mediaType}
             relevantMediaData={relevantMediaData}
          />
       </main>
