@@ -29,6 +29,7 @@ export const SearchInput = styled.input`
    outline: none;
    border: none;
    width: 100%;
+   height: 100%;
    border-bottom: 2px solid transparent;
    color: white;
    background-color: ${({ theme }) => theme.colors.deepBlue};
