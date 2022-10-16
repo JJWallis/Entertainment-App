@@ -27,18 +27,18 @@ const Dashboard: NextPage = () => {
    const { query } = useRouter();
    const { media: mediaType } = query;
 
-   const collectRelevantMediaData = () =>
+   const collectMediaBasedOnRoute = () =>
       data.filter(({ category, isBookmarked }) => {
          if (['movie', 'tv'].includes(mediaType as string)) {
-            return category.includes(mediaType as string);
+            return category.toLowerCase().includes(mediaType as string);
          } else if (mediaType === 'recommended') {
-            return ['movie', 'tv'].includes(category);
+            return ['movie', 'tv'].includes(category.toLowerCase());
          } else {
-            return isBookmarked;
+            return !!isBookmarked;
          }
       });
 
-   const relevantMediaData = collectRelevantMediaData();
+   const relevantMediaData = collectMediaBasedOnRoute();
 
    console.log({ relevantMediaData });
 
