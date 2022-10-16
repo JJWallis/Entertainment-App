@@ -16,9 +16,10 @@ import { ResponseStatus } from '../../pages/dashboard/[media]';
 
 interface Props {
    status: ResponseStatus;
+   activeMediaType: string;
 }
 
-const NavigationBar: React.FC<Props> = ({ status }) => {
+const NavigationBar: React.FC<Props> = ({ status, activeMediaType }) => {
    return (
       <NavBar>
          {status === 'fail' ? (
@@ -36,6 +37,7 @@ const NavigationBar: React.FC<Props> = ({ status }) => {
                      ].map(([icon, path], idx) => (
                         <Link href={path} key={idx}>
                            <NavigationListItem
+                              isActive={path.includes(activeMediaType)}
                               key={idx}
                               dangerouslySetInnerHTML={{ __html: icon }}
                            ></NavigationListItem>

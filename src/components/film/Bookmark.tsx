@@ -1,12 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 interface Props {
-   isBookMarked: boolean
+   isBookMarked: boolean;
 }
 
 const Bookmark: React.FC<Props> = ({ isBookMarked }) => {
-   const t = ''
-
    return (
       <button
          aria-label={''}
@@ -22,7 +20,7 @@ const Bookmark: React.FC<Props> = ({ isBookMarked }) => {
             />
          </svg>
       </button>
-   )
-}
+   );
+};
 
-export default Bookmark
+export default Bookmark;

@@ -1,8 +1,8 @@
-import React from 'react'
-import Play from '../../assets/icon-play.svg'
-import Image from 'next/image'
-import Bookmark from './Bookmark'
-import type { FilmData } from '../../types/Film.interface'
+import React from 'react';
+import Play from '../../assets/icon-play.svg';
+import Image from 'next/image';
+import Bookmark from './Bookmark';
+import type { FilmData } from '../../types/Film.interface';
 
 const Film: React.FC<FilmData> = ({ isBookmarked, title, thumbnail }) => {
    return (
@@ -29,7 +29,7 @@ const Film: React.FC<FilmData> = ({ isBookmarked, title, thumbnail }) => {
             </button>
          </div>
       </div>
-   )
-}
+   );
+};
 
-export default Film
+export default Film;

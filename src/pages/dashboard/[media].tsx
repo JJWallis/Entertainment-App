@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import MediaGallery from '../../components/media-gallery/MediaGallery';
+import MediaGallery from '../../components/media-gallery';
 
 import NavigationBar from '../../components/navbar/Navbar';
 
@@ -58,11 +58,10 @@ export async function getStaticPaths() {
 const Dashboard: NextPage<Props> = ({ status }) => {
    const { query } = useRouter();
    const { media } = query;
-   console.log({ query });
 
    return (
       <main>
-         <NavigationBar status={status} />
+         <NavigationBar status={status} activeMediaType={media as string} />
          <input type="text" placeholder="Search for TV Series" />
          <MediaGallery title={media as string} />
       </main>

@@ -26,11 +26,16 @@ export const NavBarNavigation = styled.nav`
    }
 `;
 
-export const NavigationListItem = styled.li`
+interface NavigationListItemProps {
+   isActive: boolean;
+}
+
+export const NavigationListItem = styled.li<NavigationListItemProps>`
    cursor: pointer;
    svg {
       path {
          transition: fill 200ms ease-in;
+         ${({ isActive }) => isActive && 'fill: white;'}
       }
    }
    svg:hover {
