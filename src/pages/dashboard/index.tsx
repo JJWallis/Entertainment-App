@@ -6,6 +6,12 @@ import {
    NavBar,
    NavBarNavigation,
 } from '../../components/styled/NavBar.styled';
+import IconHome from '../../assets/icon-nav-home.svg';
+import IconMovie from '../../assets/icon-nav-movies.svg';
+import IconTv from '../../assets/icon-nav-tv-series.svg';
+import IconBookmark from '../../assets/icon-nav-bookmark.svg';
+import IconAvatar from '../../assets/image-avatar.png';
+
 import { User } from '../../context/userContext';
 
 interface Props extends Partial<User> {
@@ -27,7 +33,6 @@ export const getStaticProps = async (): Promise<GetStaticProps> => {
       return {
          props: {
             status: 'success',
-            profileImage: 'https://via.placeholder.com/800.png',
             email,
             name,
             username,
@@ -43,13 +48,7 @@ export const getStaticProps = async (): Promise<GetStaticProps> => {
    }
 };
 
-const Dashboard: React.FC<Props> = ({
-   email,
-   name,
-   username,
-   profileImage,
-   status,
-}) => {
+const Dashboard: React.FC<Props> = ({ status }) => {
    return (
       <main>
          <NavBar>
@@ -60,18 +59,21 @@ const Dashboard: React.FC<Props> = ({
                   <div>Logo</div>
                   <NavBarNavigation>
                      <ul>
-                        <li>{email}</li>
-                        <li>{name}</li>
-                        <li>{username}</li>
+                        {[IconHome, IconMovie, IconTv, IconBookmark].map(
+                           (icon, idx) => (
+                              <li key={idx}>
+                                 <Image src={icon} alt="" />
+                              </li>
+                           )
+                        )}
                      </ul>
                   </NavBarNavigation>
                   <div>
                      <Image
-                        src={profileImage as string}
+                        src={IconAvatar}
                         alt="user profile"
-                        layout="responsive"
-                        width="800"
-                        height="800"
+                        width="30"
+                        height="30"
                      />
                   </div>
                </>

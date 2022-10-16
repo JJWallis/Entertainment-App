@@ -6,6 +6,13 @@ export const NavBar = styled.header`
    padding: 15px 10px;
    color: white;
    background-color: ${({ theme }) => theme.colors.darkBlue};
+
+   & > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
 `;
 
 export const NavBarNavigation = styled.nav`
