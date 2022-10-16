@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import data from '../../data.json';
 import MediaGallery from '../../components/media-gallery';
 import NavigationBar from '../../components/navbar/Navbar';
+import Search from '../../components/search';
 
 export const getStaticProps = async () => {
    return {
@@ -47,7 +48,7 @@ const Dashboard: NextPage = () => {
    return (
       <main>
          <NavigationBar activeMediaType={mediaType} />
-         <input type="text" placeholder="Search for TV Series" />
+         <Search />
          <MediaGallery
             title={mediaType}
             relevantMediaData={relevantMediaData}
