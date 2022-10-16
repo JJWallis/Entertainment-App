@@ -19,6 +19,8 @@ export const LoginInputContainer = styled.div`
 export const SearchInputContainer = styled.div`
    display: grid;
    grid-template-columns: minmax(auto, 50px) 1fr;
+   width: 90%;
+   margin-inline: auto;
    & > :first-child {
       svg {
          display: grid;

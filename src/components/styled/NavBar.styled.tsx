@@ -4,6 +4,7 @@ export const NavBar = styled.header`
    display: flex;
    justify-content: space-between;
    padding: 15px 10px;
+   margin-bottom: 25px;
    color: white;
    background-color: ${({ theme }) => theme.colors.darkBlue};
 
@@ -16,13 +17,14 @@ export const NavBar = styled.header`
 `;
 
 export const NavBarNavigation = styled.nav`
+   display: flex;
+   justify-content: center;
+   align-items: center;
    ul {
       padding: 0;
       margin: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
+      gap: 15px;
    }
 `;
 
@@ -31,6 +33,8 @@ interface NavigationListItemProps {
 }
 
 export const NavigationListItem = styled.li<NavigationListItemProps>`
+   display: grid;
+   place-items: center;
    cursor: pointer;
    svg {
       path {
