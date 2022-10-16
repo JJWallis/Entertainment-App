@@ -12,7 +12,7 @@ import IconAvatar from '../../assets/image-avatar.png';
 import TvIcon from '../../components/icon/TvIcon';
 import BookmarkIcon from '../../components/icon/BookmarkIcon';
 import MoviesIcon from '../../components/icon/MoviesIcon';
-import { ResponseStatus } from '../../pages/dashboard';
+import { ResponseStatus } from '../../pages/dashboard/[media]';
 
 interface Props {
    status: ResponseStatus;
@@ -29,10 +29,10 @@ const NavigationBar: React.FC<Props> = ({ status }) => {
                <NavBarNavigation>
                   <ul>
                      {[
-                        [HomeIcon, '/'],
-                        [MoviesIcon, '/movies'],
-                        [TvIcon, '/tv'],
-                        [BookmarkIcon, '/bookmarks'],
+                        [HomeIcon, '/dashboard/recommended'],
+                        [MoviesIcon, '/dashboard/movies'],
+                        [TvIcon, '/dashboard/tv'],
+                        [BookmarkIcon, '/dashboard/bookmarks'],
                      ].map(([icon, path], idx) => (
                         <Link href={path} key={idx}>
                            <NavigationListItem

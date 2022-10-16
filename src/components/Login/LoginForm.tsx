@@ -157,7 +157,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                </LoginInputContainer>
             )}
          </LoginFieldSet>
-         <Link href={'/dashboard'}>
+         <Link href={'/dashboard/recommended'}>
             <LoginButton type="button">{submitBtnValue}</LoginButton>
          </Link>
          <LoginSubTitle>

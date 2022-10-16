@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import MediaGallery from '../../components/media-gallery/MediaGallery';
 
 import NavigationBar from '../../components/navbar/Navbar';
 
@@ -40,10 +43,28 @@ export const getStaticProps = async (): Promise<GetStaticProps> => {
    }
 };
 
-const Dashboard: React.FC<Props> = ({ status }) => {
+export async function getStaticPaths() {
+   return {
+      paths: [
+         { params: { media: 'recommended' } },
+         { params: { media: 'movies' } },
+         { params: { media: 'tv' } },
+         { params: { media: 'bookmarks' } },
+      ],
+      fallback: false,
+   };
+}
+
+const Dashboard: NextPage<Props> = ({ status }) => {
+   const { query } = useRouter();
+   const { media } = query;
+   console.log({ query });
+
    return (
       <main>
          <NavigationBar status={status} />
+         <input type="text" placeholder="Search for TV Series" />
+         <MediaGallery title={media as string} />
       </main>
    );
 };
