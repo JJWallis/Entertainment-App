@@ -1,17 +1,18 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import axios from 'axios';
 
 import {
    NavBar,
    NavBarNavigation,
+   NavigationListItem,
 } from '../../components/styled/NavBar.styled';
-import IconHome from '../../assets/icon-nav-home.svg';
-import IconMovie from '../../assets/icon-nav-movies.svg';
-import IconTv from '../../assets/icon-nav-tv-series.svg';
-import IconBookmark from '../../assets/icon-nav-bookmark.svg';
+import HomeIcon from '../../components/icon/HomeIcon';
 import IconAvatar from '../../assets/image-avatar.png';
-
+import TvIcon from '../../components/icon/TvIcon';
+import BookmarkIcon from '../../components/icon/BookmarkIcon';
+import MoviesIcon from '../../components/icon/MoviesIcon';
 import { User } from '../../context/userContext';
 
 interface Props extends Partial<User> {
@@ -59,13 +60,19 @@ const Dashboard: React.FC<Props> = ({ status }) => {
                   <div>Logo</div>
                   <NavBarNavigation>
                      <ul>
-                        {[IconHome, IconMovie, IconTv, IconBookmark].map(
-                           (icon, idx) => (
-                              <li key={idx}>
-                                 <Image src={icon} alt="" />
-                              </li>
-                           )
-                        )}
+                        {[
+                           [HomeIcon, '/'],
+                           [MoviesIcon, '/movies'],
+                           [TvIcon, '/tv'],
+                           [BookmarkIcon, '/bookmarks'],
+                        ].map(([icon, path], idx) => (
+                           <Link href={path} key={idx}>
+                              <NavigationListItem
+                                 key={idx}
+                                 dangerouslySetInnerHTML={{ __html: icon }}
+                              ></NavigationListItem>
+                           </Link>
+                        ))}
                      </ul>
                   </NavBarNavigation>
                   <div>

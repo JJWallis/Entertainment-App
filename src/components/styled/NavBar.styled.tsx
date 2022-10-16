@@ -25,3 +25,17 @@ export const NavBarNavigation = styled.nav`
       gap: 5px;
    }
 `;
+
+export const NavigationListItem = styled.li`
+   cursor: pointer;
+   svg {
+      path {
+         transition: fill 200ms ease-in;
+      }
+   }
+   svg:hover {
+      path {
+         fill: white;
+      }
+   }
+`;
