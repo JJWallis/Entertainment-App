@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import axios from 'axios';
 
-import RenderPage from '../../components/page/RenderPage';
 import {
    NavBar,
    NavBarNavigation,
@@ -52,35 +51,33 @@ const Dashboard: React.FC<Props> = ({
    status,
 }) => {
    return (
-      <RenderPage>
-         <main>
-            <NavBar>
-               {status === 'fail' ? (
-                  <p>error fetching user data!</p>
-               ) : (
-                  <>
-                     <div>Logo</div>
-                     <NavBarNavigation>
-                        <ul>
-                           <li>{email}</li>
-                           <li>{name}</li>
-                           <li>{username}</li>
-                        </ul>
-                     </NavBarNavigation>
-                     <div>
-                        <Image
-                           src={profileImage as string}
-                           alt="user profile"
-                           layout="responsive"
-                           width="800"
-                           height="800"
-                        />
-                     </div>
-                  </>
-               )}
-            </NavBar>
-         </main>
-      </RenderPage>
+      <main>
+         <NavBar>
+            {status === 'fail' ? (
+               <p>error fetching user data!</p>
+            ) : (
+               <>
+                  <div>Logo</div>
+                  <NavBarNavigation>
+                     <ul>
+                        <li>{email}</li>
+                        <li>{name}</li>
+                        <li>{username}</li>
+                     </ul>
+                  </NavBarNavigation>
+                  <div>
+                     <Image
+                        src={profileImage as string}
+                        alt="user profile"
+                        layout="responsive"
+                        width="800"
+                        height="800"
+                     />
+                  </div>
+               </>
+            )}
+         </NavBar>
+      </main>
    );
 };
 
