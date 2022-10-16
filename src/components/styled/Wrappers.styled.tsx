@@ -18,8 +18,12 @@ export const LoginInputContainer = styled.div`
 
 export const SearchInputContainer = styled.div`
    display: grid;
-   grid-template-columns: auto 1fr;
-   & > * {
-      outline: 1px solid red;
+   grid-template-columns: minmax(auto, 50px) 1fr;
+   & > :first-child {
+      svg {
+         display: grid;
+         place-items: center;
+         height: 100%;
+      }
    }
 `;
