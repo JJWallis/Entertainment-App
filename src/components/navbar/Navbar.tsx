@@ -1,20 +1,60 @@
-import React from 'react'
-import Logo from '../../assets/logo.svg'
-import Image from 'next/image'
-import Navigation from './Navigation'
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-const NavBar: React.FC = () => {
-   return (
-      <div className="pt-11 pb-11 bg-darkBlue w-[100%]">
-         <div className="border-2 w-[90%] m-auto flex">
-            <div className="grid place-items-center">
-               <Image src={Logo} alt="" width="35px" height="35px" />
-            </div>
-            <Navigation />
-            <div>{/* profile */}</div>
-         </div>
-      </div>
-   )
+import {
+   NavBar,
+   NavBarNavigation,
+   NavigationListItem,
+} from '../../components/styled/NavBar.styled';
+import HomeIcon from '../../components/icon/HomeIcon';
+import IconAvatar from '../../assets/image-avatar.png';
+import TvIcon from '../../components/icon/TvIcon';
+import BookmarkIcon from '../../components/icon/BookmarkIcon';
+import MoviesIcon from '../../components/icon/MoviesIcon';
+import { ResponseStatus } from '../../pages/dashboard';
+
+interface Props {
+   status: ResponseStatus;
 }
 
-export default NavBar
+const NavigationBar: React.FC<Props> = ({ status }) => {
+   return (
+      <NavBar>
+         {status === 'fail' ? (
+            <p>error fetching user data!</p>
+         ) : (
+            <>
+               <div>Logo</div>
+               <NavBarNavigation>
+                  <ul>
+                     {[
+                        [HomeIcon, '/'],
+                        [MoviesIcon, '/movies'],
+                        [TvIcon, '/tv'],
+                        [BookmarkIcon, '/bookmarks'],
+                     ].map(([icon, path], idx) => (
+                        <Link href={path} key={idx}>
+                           <NavigationListItem
+                              key={idx}
+                              dangerouslySetInnerHTML={{ __html: icon }}
+                           ></NavigationListItem>
+                        </Link>
+                     ))}
+                  </ul>
+               </NavBarNavigation>
+               <div>
+                  <Image
+                     src={IconAvatar}
+                     alt="user profile"
+                     width="30"
+                     height="30"
+                  />
+               </div>
+            </>
+         )}
+      </NavBar>
+   );
+};
+
+export default NavigationBar;
