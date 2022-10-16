@@ -9,11 +9,15 @@ import {
 } from '../../components/styled/NavBar.styled';
 import { User } from '../../context/userContext';
 
-interface Props extends User {
+interface Props extends Partial<User> {
    status: 'success' | 'fail';
 }
 
-export const getStaticProps = async () => {
+interface GetStaticProps {
+   props: Props;
+}
+
+export const getStaticProps = async (): Promise<GetStaticProps> => {
    try {
       const { data: userData }: { data: User[] } = await axios.get(
          'https://jsonplaceholder.typicode.com/users'
@@ -65,7 +69,7 @@ const Dashboard: React.FC<Props> = ({
                      </NavBarNavigation>
                      <div>
                         <Image
-                           src={profileImage}
+                           src={profileImage as string}
                            alt="user profile"
                            layout="responsive"
                            width="800"
