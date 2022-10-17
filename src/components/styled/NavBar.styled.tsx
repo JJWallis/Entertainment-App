@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const NavBar = styled.header`
    display: flex;
    justify-content: space-between;
-   padding: 15px 10px;
+   align-items: center;
+   padding: 15px;
    margin-bottom: 25px;
    color: white;
    background-color: ${({ theme }) => theme.colors.darkBlue};
@@ -24,7 +25,7 @@ export const NavBarNavigation = styled.nav`
       padding: 0;
       margin: 0;
       display: flex;
-      gap: 15px;
+      gap: clamp(20px, 5vw, 30px);
    }
 `;
 
