@@ -45,8 +45,30 @@ export const GalleryContainer = styled(ContainerWrapper)`
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
    & > * {
-      outline: 1px solid white;
+      /* outline: 1px solid white; */
       padding-bottom: 20px;
+   }
+`;
+
+export const GalleryImageContainer = styled.div`
+   outline: 1px solid red;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+
+   & > :first-child {
+      position: relative;
+      z-index: 1;
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+   }
+
+   & > p {
+      position: relative;
+      z-index: 2;
+      grid-column: 2 / -1;
+      grid-row: 1 / -1;
+      text-align: right;
+      margin: clamp(5px, 5vw, 20px) clamp(5px, 5vw, 20px) 0 0;
    }
 `;
 

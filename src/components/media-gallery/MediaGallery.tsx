@@ -3,6 +3,7 @@ import { FilmData } from '../../types/Film.interface';
 import { MediaGalleryTitle } from '../styled/Title.styled';
 import {
    GalleryContainer,
+   GalleryImageContainer,
    MediaInfoContainer,
 } from '../styled/Wrappers.styled';
 
@@ -29,14 +30,15 @@ const MediaGallery: React.FC<Props> = ({ title, relevantMediaData }) => (
                idx
             ) => (
                <div key={idx}>
-                  <div>
+                  <GalleryImageContainer>
                      <Image
                         src={`/${small}`}
                         alt=""
                         width="560px"
                         height="348px"
                      />
-                  </div>
+                     <p>Bookmark icon</p>
+                  </GalleryImageContainer>
                   <MediaInfoContainer>
                      <p>{year}</p>
                      <p>{category}</p>
