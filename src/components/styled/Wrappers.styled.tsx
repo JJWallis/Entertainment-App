@@ -44,7 +44,7 @@ export const SearchInputContainer = styled(ContainerWrapper)`
 export const GalleryContainer = styled.div`
    outline: 1px solid white;
    display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
    & > * {
       outline: 1px solid white;
    }

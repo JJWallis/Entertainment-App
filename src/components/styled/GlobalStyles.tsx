@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -7,6 +7,7 @@ body {
   text-rendering: optimizeSpeed;
   font: ${({ theme }) => theme.fontWeights.light} ${({ theme }) =>
    theme.fontSizes.bodyLarge}/1.6 'Outfit', sans-serif;
+   color: white;
   overflow-x: hidden;
   background-color: ${({ theme }) => theme.colors.deepBlue};
 }
@@ -85,6 +86,6 @@ fieldset {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-} `
+} `;
 
-export default GlobalStyles
+export default GlobalStyles;
