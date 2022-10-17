@@ -26,11 +26,12 @@ export const DashboardMainContainer = styled.main`
    }
 `;
 
-export const SearchInputContainer = styled.div`
+export const SearchInputContainer = styled(ContainerWrapper)`
    display: grid;
    grid-template-columns: minmax(auto, 50px) 1fr;
-   width: 90%;
-   margin-inline: auto;
+   @media (min-width: ${({ theme }) => theme.breakPoints.tablet}) {
+      padding-inline: 0;
+   }
    & > :first-child {
       svg {
          display: grid;
