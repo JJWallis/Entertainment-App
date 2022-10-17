@@ -44,16 +44,14 @@ export const SearchInputContainer = styled(ContainerWrapper)`
 export const GalleryContainer = styled(ContainerWrapper)`
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-   & > * {
-      /* outline: 1px solid white; */
-      padding-bottom: 20px;
-   }
+   gap: 20px 30px;
 `;
 
 export const GalleryImageContainer = styled.div`
-   outline: 1px solid red;
    display: grid;
    grid-template-columns: repeat(2, 1fr);
+   border-radius: 10px;
+   overflow: hidden;
 
    & > :first-child {
       position: relative;
@@ -68,7 +66,7 @@ export const GalleryImageContainer = styled.div`
       grid-column: 2 / -1;
       grid-row: 1 / -1;
       text-align: right;
-      margin: clamp(5px, 5vw, 20px) clamp(5px, 5vw, 20px) 0 0;
+      margin: clamp(5px, 3vw, 10px) clamp(5px, 7vw, 20px) 0 0;
    }
 `;
 
