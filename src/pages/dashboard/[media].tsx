@@ -5,6 +5,7 @@ import data from '../../data.json';
 import MediaGallery from '../../components/media-gallery';
 import NavigationBar from '../../components/navbar/Navbar';
 import Search from '../../components/search';
+import { DashboardMainContainer } from '../../components/styled/Wrappers.styled';
 
 export const getStaticProps = async () => {
    return {
@@ -46,14 +47,14 @@ const Dashboard: NextPage = () => {
    const relevantMediaData = collectMediaBasedOnRoute();
 
    return (
-      <main>
+      <DashboardMainContainer>
          <NavigationBar activeMediaType={mediaType} />
          <Search />
          <MediaGallery
             title={mediaType}
             relevantMediaData={relevantMediaData}
          />
-      </main>
+      </DashboardMainContainer>
    );
 };
 

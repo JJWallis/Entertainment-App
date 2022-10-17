@@ -9,6 +9,10 @@ export const NavBar = styled.header`
    color: white;
    background-color: ${({ theme }) => theme.colors.darkBlue};
 
+   @media (min-width: ${({ theme }) => theme.breakPoints.tablet}) {
+      border-radius: 10px;
+   }
+
    & > div {
       display: flex;
       flex-direction: column;

@@ -20,6 +20,12 @@ export const LoginInputContainer = styled.div`
    position: relative;
 `;
 
+export const DashboardMainContainer = styled.main`
+   @media (min-width: ${({ theme }) => theme.breakPoints.tablet}) {
+      padding: 20px;
+   }
+`;
+
 export const SearchInputContainer = styled.div`
    display: grid;
    grid-template-columns: minmax(auto, 50px) 1fr;

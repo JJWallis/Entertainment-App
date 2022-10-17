@@ -1,34 +1,34 @@
 declare module 'styled-components' {
    export interface DefaultTheme {
       breakPoints: {
-         mobile: string
-         tablet: string
-         desktop: string
-      }
+         mobile: string;
+         tablet: string;
+         desktop: string;
+      };
       colors: {
-         brightRed: string
-         deepBlue: string
-         darkBlue: string
-         lightBlue: string
-         white: string
-      }
+         brightRed: string;
+         deepBlue: string;
+         darkBlue: string;
+         lightBlue: string;
+         white: string;
+      };
       fontSizes: {
-         bodySmall: string
-         bodyLarge: string
-         headingExtraSmall: string
-         headingSmallMedium: string
-         headingLarge: string
-      }
+         bodySmall: string;
+         bodyLarge: string;
+         headingExtraSmall: string;
+         headingSmallMedium: string;
+         headingLarge: string;
+      };
       fontWeights: {
-         light: number
-         medium: number
-         bold: number
-      }
+         light: number;
+         medium: number;
+         bold: number;
+      };
    }
 }
 
 export const Theme = {
-   breakPoints: { mobile: '', tablet: '', desktop: '' },
+   breakPoints: { mobile: '', tablet: '768px', desktop: '1000px' },
    colors: {
       brightRed: '#FC4747',
       deepBlue: '#10141E',
@@ -48,4 +48,4 @@ export const Theme = {
       medium: 400,
       bold: 500,
    },
-}
+};
