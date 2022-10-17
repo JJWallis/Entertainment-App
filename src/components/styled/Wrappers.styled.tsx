@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const ContainerWrapper = styled.div`
    padding-inline: 20px;
+   @media (min-width: ${({ theme }) => theme.breakPoints.tablet}) {
+      padding-inline: 0;
+   }
 `;
 
 export const LoginContainer = styled.div`
@@ -29,9 +32,6 @@ export const DashboardMainContainer = styled.main`
 export const SearchInputContainer = styled(ContainerWrapper)`
    display: grid;
    grid-template-columns: minmax(auto, 50px) 1fr;
-   @media (min-width: ${({ theme }) => theme.breakPoints.tablet}) {
-      padding-inline: 0;
-   }
    & > :first-child {
       svg {
          display: grid;
@@ -41,11 +41,17 @@ export const SearchInputContainer = styled(ContainerWrapper)`
    }
 `;
 
-export const GalleryContainer = styled.div`
-   outline: 1px solid white;
+export const GalleryContainer = styled(ContainerWrapper)`
    display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
    & > * {
       outline: 1px solid white;
+      padding-bottom: 20px;
    }
+`;
+
+export const MediaInfoContainer = styled.div`
+   display: flex;
+   align-items: center;
+   gap: clamp(5px, 3vw, 20px);
 `;

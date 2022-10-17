@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { FilmData } from '../../types/Film.interface';
 import { MediaGalleryTitle } from '../styled/Title.styled';
-import { GalleryContainer } from '../styled/Wrappers.styled';
+import {
+   GalleryContainer,
+   MediaInfoContainer,
+} from '../styled/Wrappers.styled';
 
 interface Props {
    title: string;
@@ -30,15 +33,15 @@ const MediaGallery: React.FC<Props> = ({ title, relevantMediaData }) => (
                      <Image
                         src={`/${small}`}
                         alt=""
-                        width="100px"
-                        height="100px"
+                        width="560px"
+                        height="348px"
                      />
                   </div>
-                  <div>
+                  <MediaInfoContainer>
                      <p>{year}</p>
                      <p>{category}</p>
                      <p>{rating}</p>
-                  </div>
+                  </MediaInfoContainer>
                   <h2>{title}</h2>
                </div>
             )
