@@ -6,7 +6,7 @@ import type { FilmData } from '../../types/Film.interface';
 
 const Film: React.FC<FilmData> = ({ isBookmarked, title, thumbnail }) => {
    return (
-      <div role="gridcell" className="relative block">
+      <div>
          <Image
             src={`/${thumbnail.regular.large}`}
             alt={title}

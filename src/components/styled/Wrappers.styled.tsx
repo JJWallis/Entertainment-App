@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const ContainerWrapper = styled.div`
+   padding-inline: 20px;
+`;
+
 export const LoginContainer = styled.div`
    display: flex;
    justify-content: center;
@@ -27,5 +31,14 @@ export const SearchInputContainer = styled.div`
          place-items: center;
          height: 100%;
       }
+   }
+`;
+
+export const GalleryContainer = styled.div`
+   outline: 1px solid white;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+   & > * {
+      outline: 1px solid white;
    }
 `;

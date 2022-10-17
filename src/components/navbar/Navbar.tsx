@@ -8,12 +8,13 @@ import {
    NavigationListItem,
 } from '../../components/styled/NavBar.styled';
 
-import HomeIcon from '../../components/icon/HomeIcon';
+import HomeIcon from '../icon/HomeIcon';
 import IconAvatar from '../../assets/image-avatar.png';
-import TvIcon from '../../components/icon/TvIcon';
-import BookmarkIcon from '../../components/icon/BookmarkIcon';
-import MoviesIcon from '../../components/icon/MoviesIcon';
+import TvIcon from '../icon/TvIcon';
+import BookmarkIcon from '../icon/BookmarkIcon';
+import MoviesIcon from '../icon/MoviesIcon';
 import styled from 'styled-components';
+import LogoIcon from '../icon/LogoIcon';
 
 interface Props {
    activeMediaType: string;
@@ -32,7 +33,7 @@ const NavigationBar: React.FC<Props> = ({ activeMediaType }) => {
    return (
       <NavBar>
          <>
-            <div>Logo</div>
+            <div dangerouslySetInnerHTML={{ __html: LogoIcon }}></div>
             <NavBarNavigation>
                <ul>
                   {[

@@ -1,4 +1,5 @@
 import { FilmData } from '../../types/Film.interface';
+import { GalleryContainer } from '../styled/Wrappers.styled';
 
 interface Props {
    title: string;
@@ -8,9 +9,11 @@ interface Props {
 const MediaGallery: React.FC<Props> = ({ title, relevantMediaData }) => (
    <>
       <h1>{title}</h1>
-      {relevantMediaData.map(({ title }, idx) => (
-         <p key={idx}>{title}</p>
-      ))}
+      <GalleryContainer>
+         {relevantMediaData.map(({ title }, idx) => (
+            <div key={idx}>{title}</div>
+         ))}
+      </GalleryContainer>
    </>
 );
 
