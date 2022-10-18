@@ -50,6 +50,7 @@ export const GalleryContainer = styled(ContainerWrapper)`
 export const GalleryImageContainer = styled.div`
    display: grid;
    grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(2, 1fr);
    border-radius: 10px;
    overflow: hidden;
 

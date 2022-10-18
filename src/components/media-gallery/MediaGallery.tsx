@@ -39,8 +39,10 @@ const MediaGallery: React.FC<Props> = ({ title, relevantMediaData }) => (
                         width="560px"
                         height="348px"
                      />
-                     <Bookmark isBookMarked={isBookmarked} />
-                     <p>Bookmark icon</p>
+                     <Bookmark
+                        isBookMarked={isBookmarked}
+                        category={category}
+                     />
                   </GalleryImageContainer>
                   <MediaInfoContainer>
                      <p>{year}</p>

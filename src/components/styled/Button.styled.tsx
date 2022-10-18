@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const LoginButton = styled.button`
    display: block;
@@ -16,4 +16,13 @@ export const LoginButton = styled.button`
       background-color: ${({ theme }) => theme.colors.white};
       color: ${({ theme }) => theme.colors.deepBlue};
    }
-`
+`;
+
+export const BookmarkButton = styled.button`
+   outline: 2px solid blue;
+   position: relative;
+   z-index: 3;
+   grid-row: 2 / 1;
+   grid-column: 2 / -1;
+   cursor: pointer;
+`;
