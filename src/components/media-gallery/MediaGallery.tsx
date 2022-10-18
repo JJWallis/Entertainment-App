@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { FilmData } from '../../types/Film.interface';
+import Bookmark from '../film/Bookmark';
 import { MediaGalleryTitle } from '../styled/Title.styled';
 import {
    GalleryContainer,
@@ -26,6 +27,7 @@ const MediaGallery: React.FC<Props> = ({ title, relevantMediaData }) => (
                   },
                   year,
                   category,
+                  isBookmarked,
                },
                idx
             ) => (
@@ -37,6 +39,7 @@ const MediaGallery: React.FC<Props> = ({ title, relevantMediaData }) => (
                         width="560px"
                         height="348px"
                      />
+                     <Bookmark isBookMarked={isBookmarked} />
                      <p>Bookmark icon</p>
                   </GalleryImageContainer>
                   <MediaInfoContainer>
