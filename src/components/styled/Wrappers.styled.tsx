@@ -43,7 +43,7 @@ export const SearchInputContainer = styled(ContainerWrapper)`
 
 export const GalleryContainer = styled(ContainerWrapper)`
    display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
    gap: 20px 30px;
 `;
 

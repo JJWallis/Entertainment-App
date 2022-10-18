@@ -19,10 +19,21 @@ export const LoginButton = styled.button`
 `;
 
 export const BookmarkButton = styled.button`
-   outline: 2px solid blue;
+   display: grid;
+   place-content: start right;
    position: relative;
    z-index: 3;
    grid-row: 2 / 1;
    grid-column: 2 / -1;
+   padding: 10px 15px 0 0;
    cursor: pointer;
+
+   & > div {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.4);
+   }
 `;
