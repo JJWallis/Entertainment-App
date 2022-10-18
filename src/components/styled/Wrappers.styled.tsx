@@ -53,27 +53,24 @@ export const GalleryImageContainer = styled.div`
    grid-template-rows: repeat(2, 1fr);
    border-radius: 10px;
    overflow: hidden;
+   position: relative;
+   isolation: isolate;
 
    &::before {
       content: '';
       display: block;
       grid-column: 1 / -1;
       grid-row: 1 / -1;
-      position: relative;
       z-index: 2;
       background-color: rgba(0, 0, 0, 0.2);
    }
 
    & > :first-child {
-      position: relative;
-      z-index: 1;
       grid-column: 1 / -1;
       grid-row: 1 / -1;
    }
 
    & > p {
-      position: relative;
-      z-index: 3;
       grid-column: 2 / -1;
       grid-row: 1 / -1;
       text-align: right;
