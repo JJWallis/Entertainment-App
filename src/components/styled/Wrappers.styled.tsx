@@ -47,10 +47,8 @@ export const GalleryContainer = styled(ContainerWrapper)`
    gap: 20px 30px;
 `;
 
-export const GalleryImageContainer = styled.div`
+const ImageContainer = styled.div`
    display: grid;
-   grid-template-columns: repeat(2, 1fr);
-   grid-template-rows: repeat(2, 1fr);
    border-radius: 10px;
    overflow: hidden;
    position: relative;
@@ -69,17 +67,25 @@ export const GalleryImageContainer = styled.div`
       grid-column: 1 / -1;
       grid-row: 1 / -1;
    }
+`;
 
-   & > p {
-      grid-column: 2 / -1;
-      grid-row: 1 / -1;
-      text-align: right;
-      margin: clamp(5px, 3vw, 10px) clamp(5px, 7vw, 20px) 0 0;
-   }
+export const GalleryImageContainer = styled(ImageContainer)`
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(2, 1fr);
+`;
+
+export const TrendingImageContainer = styled(ImageContainer)`
+   grid-template-columns: repeat(4, 1fr);
+   grid-template-rows: repeat(4, 1fr);
 `;
 
 export const MediaInfoContainer = styled.div`
    display: flex;
    align-items: center;
    gap: clamp(5px, 3vw, 20px);
+
+   ${TrendingImageContainer} & {
+      grid-column: 1 / -1;
+      grid-row: 2 / 4;
+   }
 `;
