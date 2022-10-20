@@ -1,4 +1,5 @@
 import { FilmData } from '../../types/Film.interface';
+import Film from '../film';
 import { TrendingImageContainer } from '../styled/Wrappers.styled';
 
 interface Props {
@@ -12,7 +13,9 @@ const TrendingGallery: React.FC<Props> = ({ relevantMediaData }) => {
 
    return (
       <TrendingImageContainer>
-         {/* {trendingMedia.map(() => )} */}
+         {trendingMedia.map((media, idx) => (
+            <Film key={idx} {...media} />
+         ))}
       </TrendingImageContainer>
    );
 };

@@ -50,11 +50,11 @@ const Dashboard: NextPage = () => {
 
    return (
       <DashboardMainContainer>
+         <NavigationBar activeMediaType={mediaType} />
+         <Search />
          {isRecommended && (
             <TrendingGallery relevantMediaData={relevantMediaData} />
          )}
-         <NavigationBar activeMediaType={mediaType} />
-         <Search />
          <MediaGallery
             title={mediaType}
             relevantMediaData={relevantMediaData}
