@@ -6,6 +6,7 @@ import MediaGallery from '../../components/media-gallery';
 import NavigationBar from '../../components/navbar/Navbar';
 import Search from '../../components/search';
 import { DashboardMainContainer } from '../../components/styled/Wrappers.styled';
+import TrendingGallery from '../../components/media-gallery/TrendingGallery';
 
 export const getStaticProps = async () => {
    return {
@@ -29,16 +30,17 @@ const Dashboard: NextPage = () => {
    const { query } = useRouter();
    const { media } = query;
    const mediaType = media as string;
+   const isRecommended = mediaType === 'recommended';
 
    const collectMediaBasedOnRoute = () =>
-      data.filter(({ category, isBookmarked }) => {
+      data.filter(({ category, isBookmarked, isTrending }) => {
          const currCategory = category.toLowerCase();
          const mediaTypes = ['movie', 'tv'];
 
          if (mediaTypes.includes(mediaType)) {
             return currCategory.includes(mediaType);
-         } else if (mediaType === 'recommended') {
-            return mediaTypes.includes(currCategory);
+         } else if (isRecommended) {
+            return mediaTypes.includes(currCategory) || isTrending;
          } else {
             return !!isBookmarked;
          }
@@ -48,6 +50,9 @@ const Dashboard: NextPage = () => {
 
    return (
       <DashboardMainContainer>
+         {isRecommended && (
+            <TrendingGallery relevantMediaData={relevantMediaData} />
+         )}
          <NavigationBar activeMediaType={mediaType} />
          <Search />
          <MediaGallery

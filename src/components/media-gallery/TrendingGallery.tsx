@@ -1,7 +1,20 @@
+import { FilmData } from '../../types/Film.interface';
 import { TrendingImageContainer } from '../styled/Wrappers.styled';
 
-const TrendingGallery: React.FC = () => {
-   return <TrendingImageContainer></TrendingImageContainer>;
+interface Props {
+   relevantMediaData: FilmData[];
+}
+
+const TrendingGallery: React.FC<Props> = ({ relevantMediaData }) => {
+   const trendingMedia = relevantMediaData.filter(
+      ({ isTrending }) => isTrending
+   );
+
+   return (
+      <TrendingImageContainer>
+         {/* {trendingMedia.map(() => )} */}
+      </TrendingImageContainer>
+   );
 };
 
 export default TrendingGallery;

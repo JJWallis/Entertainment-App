@@ -47,6 +47,12 @@ export const GalleryContainer = styled(ContainerWrapper)`
    gap: 20px 30px;
 `;
 
+export const TrendingGalleryContainer = styled(ContainerWrapper)`
+   display: grid;
+   grid-template-columns: repeat(4, 200px);
+   gap: 0 30px;
+`;
+
 const ImageContainer = styled.div`
    display: grid;
    border-radius: 10px;
