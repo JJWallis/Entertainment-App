@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 
 import { LoginTitle } from '../styled/Title.styled';
 import LoginFormStyled from '../styled/Form.styled';
@@ -9,6 +9,7 @@ import { LoginInput } from '../styled/Input.styled';
 import { LoginErrorMessage } from '../styled/ErrorMessage.styled';
 import { LoginButton } from '../styled/Button.styled';
 import { LoginSubTitle } from '../styled/SubTitle.styled';
+import LoginSignUpInput from './LoginInput';
 
 type FormStateValidation = Partial<InitialFormState>;
 
@@ -46,6 +47,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
    const [errorMessages, setErrorMessages] = useState<InitialFormState>(
       initState(isSignUpForm)
    );
+   const uid = useId();
 
    const [formTitle, submitBtnValue, ctaValue, toggleFormLink] = isSignUpForm
       ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
@@ -108,65 +110,33 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
       <LoginFormStyled>
          <LoginTitle>{formTitle}</LoginTitle>
          <LoginFieldSet>
-            <LoginInputContainer>
-               <LoginInput
-                  data-testid="login-email-field"
-                  type="email"
-                  value={userDetails.email}
-                  onChange={(evt) =>
-                     setUserDetails({
-                        ...userDetails,
-                        ['email']: evt.target.value,
-                     })
-                  }
-                  placeholder="Email address"
-                  error={!!errorMessages.email}
-               />
-               {errorMessages.email && (
-                  <LoginErrorMessage data-testid="login-email-error">
-                     {errorMessages.email}
-                  </LoginErrorMessage>
-               )}
-            </LoginInputContainer>
-            <LoginInputContainer>
-               <LoginInput
-                  type="password"
-                  value={userDetails.password}
-                  onChange={(evt) =>
-                     setUserDetails({
-                        ...userDetails,
-                        ['password']: evt.target.value,
-                     })
-                  }
-                  placeholder="Password"
-                  error={!!errorMessages.password}
-               />
-               {errorMessages.password && (
-                  <LoginErrorMessage>
-                     {errorMessages.password}
-                  </LoginErrorMessage>
-               )}
-            </LoginInputContainer>
+            <LoginSignUpInput
+               id="email-input"
+               value={userDetails['email']}
+               inputType="email"
+               relatedErrorMessage={errorMessages['email']}
+               stateKey="email"
+               updateFormStateWithValue={updateFormStateWithValue}
+            />
+            <LoginSignUpInput
+               id="password-input"
+               value={userDetails['password']}
+               inputType="password"
+               relatedErrorMessage={errorMessages['password']}
+               stateKey="password"
+               updateFormStateWithValue={updateFormStateWithValue}
+            />
             {isSignUpForm && (
-               <LoginInputContainer>
-                  <LoginInput
-                     type="password"
-                     value={userDetails.confirmedPassword}
-                     onChange={(evt) =>
-                        setUserDetails({
-                           ...userDetails,
-                           ['confirmedPassword']: evt.target.value,
-                        })
-                     }
-                     placeholder="Repeat password"
-                     error={!!errorMessages.confirmedPassword}
-                  />
-                  {errorMessages.confirmedPassword && (
-                     <LoginErrorMessage>
-                        {errorMessages.confirmedPassword}
-                     </LoginErrorMessage>
-                  )}
-               </LoginInputContainer>
+               <LoginSignUpInput
+                  id="confirm-password-input"
+                  value={userDetails['confirmedPassword'] as string}
+                  inputType="password"
+                  relatedErrorMessage={
+                     errorMessages['confirmedPassword'] as string
+                  }
+                  stateKey="confirmedPassword"
+                  updateFormStateWithValue={updateFormStateWithValue}
+               />
             )}
          </LoginFieldSet>
          <Link href={'/dashboard/recommended'}>
