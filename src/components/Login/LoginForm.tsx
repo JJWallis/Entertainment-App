@@ -12,11 +12,13 @@ import { LoginSubTitle } from '../styled/SubTitle.styled';
 
 type FormStateValidation = Partial<InitialFormState>;
 
-interface InitialFormState {
+export interface InitialFormState {
    email: string;
    password: string;
    confirmedPassword?: string; // optional required for delete operator
 }
+
+export type LoginFormInputNames = keyof InitialFormState;
 
 interface Props {
    toggleFormType: () => void;
@@ -48,6 +50,16 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
    const [formTitle, submitBtnValue, ctaValue, toggleFormLink] = isSignUpForm
       ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
       : ['Login', 'Login to your account', "Don't have an account?", 'Sign Up'];
+
+   const updateFormStateWithValue = (
+      evt: React.ChangeEvent<HTMLInputElement>,
+      inputName: LoginFormInputNames
+   ) => {
+      setUserDetails({
+         ...userDetails,
+         [inputName]: evt.target.value,
+      });
+   };
 
    useEffect(() => {
       const validateCurrentField = (key: string, value: string) => {
