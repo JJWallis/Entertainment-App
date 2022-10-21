@@ -1,12 +1,9 @@
 import Link from 'next/link';
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LoginTitle } from '../styled/Title.styled';
 import LoginFormStyled from '../styled/Form.styled';
 import { LoginFieldSet } from '../styled/Fieldset.styled';
-import { LoginInputContainer } from '../styled/Wrappers.styled';
-import { LoginInput } from '../styled/Input.styled';
-import { LoginErrorMessage } from '../styled/ErrorMessage.styled';
 import { LoginButton } from '../styled/Button.styled';
 import { LoginSubTitle } from '../styled/SubTitle.styled';
 import LoginSignUpInput from './LoginInput';
@@ -47,7 +44,6 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
    const [errorMessages, setErrorMessages] = useState<InitialFormState>(
       initState(isSignUpForm)
    );
-   const uid = useId();
 
    const [formTitle, submitBtnValue, ctaValue, toggleFormLink] = isSignUpForm
       ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
@@ -117,6 +113,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                relatedErrorMessage={errorMessages['email']}
                stateKey="email"
                updateFormStateWithValue={updateFormStateWithValue}
+               placeholder="Enter your email"
             />
             <LoginSignUpInput
                id="password-input"
@@ -125,6 +122,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                relatedErrorMessage={errorMessages['password']}
                stateKey="password"
                updateFormStateWithValue={updateFormStateWithValue}
+               placeholder="Enter your password"
             />
             {isSignUpForm && (
                <LoginSignUpInput
@@ -136,6 +134,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                   }
                   stateKey="confirmedPassword"
                   updateFormStateWithValue={updateFormStateWithValue}
+                  placeholder="Re-confirm your password"
                />
             )}
          </LoginFieldSet>

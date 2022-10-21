@@ -13,6 +13,7 @@ interface Props {
       evt: React.ChangeEvent<HTMLInputElement>,
       inputName: LoginFormInputNames
    ) => void;
+   placeholder: string;
 }
 
 const LoginSignUpInput: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const LoginSignUpInput: React.FC<Props> = ({
    updateFormStateWithValue,
    inputType,
    stateKey,
+   placeholder,
 }) => {
    return (
       <LoginInputContainer>
@@ -30,7 +32,7 @@ const LoginSignUpInput: React.FC<Props> = ({
             type={inputType}
             value={value}
             onChange={(evt) => updateFormStateWithValue(evt, stateKey)}
-            placeholder="Email address"
+            placeholder={placeholder}
             error={!!relatedErrorMessage}
          />
          {relatedErrorMessage && (
