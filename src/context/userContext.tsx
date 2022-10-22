@@ -1,13 +1,7 @@
 import { createContext } from 'react';
+import { User } from '../types/User.interface';
 
 type UserStatus = User | null;
-
-export interface User {
-   name: string;
-   username: string;
-   email: string;
-   profileImage: string;
-}
 
 interface UserContextProviderProps {
    children: React.ReactNode;

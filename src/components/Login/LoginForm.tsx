@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import { LoginTitle } from '../styled/Title.styled';
 import LoginFormStyled from '../styled/Form.styled';
@@ -6,6 +7,8 @@ import { LoginFieldSet } from '../styled/Fieldset.styled';
 import { LoginButton } from '../styled/Button.styled';
 import { LoginSubTitle } from '../styled/SubTitle.styled';
 import LoginSignUpInput from './LoginInput';
+import IconAvatar from '../../assets/image-avatar.png';
+import { UserWithoutId } from '../../types/User.interface';
 
 type FormStateValidation = Partial<InitialFormState>;
 
@@ -45,30 +48,44 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
    );
    const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
-   const [formTitle, submitBtnValue, ctaValue, toggleFormLink] = isSignUpForm
-      ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
-      : ['Login', 'Login to your account', "Don't have an account?", 'Sign Up'];
+   const [formTitle, submitBtnValue, ctaValue, toggleFormLink, apiEndpoint] =
+      isSignUpForm
+         ? [
+              'Sign Up',
+              'Create an account',
+              'Already have an account?',
+              'Login',
+              '/api/users/sign-up',
+           ]
+         : [
+              'Login',
+              'Login to your account',
+              "Don't have an account?",
+              'Sign Up',
+              '/api/users/login',
+           ];
 
    const updateFormStateWithValue = (
       evt: React.ChangeEvent<HTMLInputElement>,
       inputName: LoginFormInputNames
-   ) => {
+   ) =>
       setUserDetails({
          ...userDetails,
          [inputName]: evt.target.value,
       });
-   };
 
    const handleFormSubmission = async (
       evt: React.FormEvent<HTMLFormElement>
    ) => {
       evt.preventDefault();
       try {
-         const res = await fetch('/api/users');
-         if (!res.ok)
-            throw new Error('Error: unable to fetch users, stopping.');
-         const users = await res.json();
-         console.log({ users });
+         const newUserData: UserWithoutId = {
+            email: userDetails['email'],
+            password: userDetails['password'],
+            profileImage: IconAvatar,
+         };
+
+         await axios.post(apiEndpoint, newUserData);
       } catch (error) {
          console.error(error);
       }
