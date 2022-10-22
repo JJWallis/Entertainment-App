@@ -86,6 +86,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
          };
 
          await axios.post(apiEndpoint, newUserData);
+         window.location.pathname = '/dashboard/recommended';
       } catch (error) {
          console.error(error);
       }
