@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const LoginButton = styled.button`
+interface LoginButtonProps {
+   isDisabled: boolean;
+}
+
+export const LoginButton = styled.button<LoginButtonProps>`
    display: block;
    width: 100%;
    border: none;
@@ -11,6 +15,12 @@ export const LoginButton = styled.button`
    color: ${({ theme }) => theme.colors.white};
    transition: background-color 200ms linear, color 200ms linear;
    cursor: pointer;
+   ${({ isDisabled }) =>
+      isDisabled &&
+      css`
+         pointer-events: none;
+         opacity: 0.7;
+      `}
 
    :hover {
       background-color: ${({ theme }) => theme.colors.white};

@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { User } from '../../../types/User.interface';
 import users from '../../../users';
 

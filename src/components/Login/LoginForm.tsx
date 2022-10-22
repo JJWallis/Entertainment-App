@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import { LoginTitle } from '../styled/Title.styled';
@@ -44,6 +43,7 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
    const [errorMessages, setErrorMessages] = useState<InitialFormState>(
       initState(isSignUpForm)
    );
+   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
    const [formTitle, submitBtnValue, ctaValue, toggleFormLink] = isSignUpForm
       ? ['Sign Up', 'Create an account', 'Already have an account?', 'Login']
@@ -57,6 +57,21 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
          ...userDetails,
          [inputName]: evt.target.value,
       });
+   };
+
+   const handleFormSubmission = async (
+      evt: React.FormEvent<HTMLFormElement>
+   ) => {
+      evt.preventDefault();
+      try {
+         const res = await fetch('/api/users');
+         if (!res.ok)
+            throw new Error('Error: unable to fetch users, stopping.');
+         const users = await res.json();
+         console.log({ users });
+      } catch (error) {
+         console.error(error);
+      }
    };
 
    useEffect(() => {
@@ -86,6 +101,11 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
          return '';
       };
 
+      const determineSubmitButtonState = () =>
+         Object.values(errorMessages).every(
+            (errorMessage) => errorMessage === ''
+         ) && Object.values(userDetails).every((userDetail) => userDetail);
+
       const userDetailsCopy = { ...userDetails };
 
       const newErrorMessages: FormStateValidation = Object.entries(
@@ -100,10 +120,12 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
 
       if (isErrorMessagesDifferent)
          setErrorMessages(newErrorMessages as InitialFormState);
+
+      setIsSubmitButtonDisabled(!determineSubmitButtonState());
    }, [userDetails, isSignUpForm, errorMessages]);
 
    return (
-      <LoginFormStyled>
+      <LoginFormStyled onSubmit={handleFormSubmission}>
          <LoginTitle>{formTitle}</LoginTitle>
          <LoginFieldSet>
             <LoginSignUpInput
@@ -138,9 +160,9 @@ const LoginForm = ({ toggleFormType, isSignUpForm }: Props) => {
                />
             )}
          </LoginFieldSet>
-         <Link href={'/dashboard/recommended'}>
-            <LoginButton type="button">{submitBtnValue}</LoginButton>
-         </Link>
+         <LoginButton isDisabled={isSubmitButtonDisabled}>
+            {submitBtnValue}
+         </LoginButton>
          <LoginSubTitle>
             {ctaValue}
             <button type="button" onClick={toggleFormType}>
