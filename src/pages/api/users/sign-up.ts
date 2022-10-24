@@ -5,9 +5,7 @@ import { v4 as uuid } from 'uuid';
 
 import { User, UserWithoutId } from '../../../types/User.interface';
 
-const users: User[] = JSON.parse(
-   readFileSync(`${__dirname}/users.json`, 'utf-8')
-);
+const users: User[] = JSON.parse(readFileSync('../../../users.json', 'utf-8'));
 
 export default async function handler(
    req: NextApiRequest,
@@ -22,10 +20,7 @@ export default async function handler(
          users.push(newUser);
          console.log('AFTER:', { users });
 
-         await promises.writeFile(
-            `${__dirname}/users.json`,
-            JSON.stringify(users)
-         );
+         await promises.writeFile('../../../users.json', JSON.stringify(users));
          res.status(200).json({ message: 'User created successfully' });
       }
    } catch (error: unknown) {

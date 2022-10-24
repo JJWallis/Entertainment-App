@@ -1,6 +1,5 @@
 import React, { useId } from 'react';
 
-import Play from '../../assets/icon-play.svg';
 import Image from 'next/image';
 import Bookmark from './Bookmark';
 import type { FilmData } from '../../types/Film.interface';

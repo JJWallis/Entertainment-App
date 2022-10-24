@@ -8,5 +8,5 @@ export const useDebounce = <T,>(fn: () => void, deps: T[]) => {
       timeoutRef.current = setTimeout(fn, 500);
    };
 
-   useEffect(debouncedFunction, deps);
+   useEffect(debouncedFunction, [...deps, fn]);
 };
